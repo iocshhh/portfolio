@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>iocsh's wibsayt :D</title>
+    <link rel="stylesheet" href="style.css">
+      <link rel="icon" href="iocsh/iocsh-logo.png">
+  </head>
+  <body>
+    <main class="wrap">
+      <!-- TOP container: profile-like view -->
+      <section id="home" class="home">
+        <div class="profile-card panel">
+          <div class="cover-wrap">
+            <img class="cover" src="iocsh/iocsh-cover.png" alt="IOCSh cover">
+          </div>
+          <div class="profile-center">
+            <img class="profile-pic" src="iocsh/iocsh-profile.png" alt="IOCSh profile">
+            <h1 class="brand">iocsh incoln izchezi</h1>
+            <h1 class="brand">xailnihiwiviwivixicixiciamien</h1>
+            <p>a maximalist graphic artist, my wibsayt is still under construction. wear your safety helmet! :b</p>
+            <!-- Social links moved here -->
+            <div class="social-list" style="margin-top:10px;">
+              <a class="social" href="https://facebook.com/iocshhh" target="_blank" rel="noopener" aria-label="Facebook @iocshhh" title="Facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 12.07C22 6.49 17.52 2 11.94 2S2 6.49 2 12.07c0 4.99 3.66 9.13 8.44 9.93v-7.03H8.9v-2.9h1.54V9.41c0-1.52.9-2.36 2.28-2.36.66 0 1.35.12 1.35.12v1.49h-.76c-.75 0-.98.46-.98.94v1.12h1.67l-.27 2.9h-1.4V22c4.78-.8 8.44-4.94 8.44-9.93z" fill="currentColor"/></svg>
+              </a>
+              <a class="social" href="https://instagram.com/iocshhh" target="_blank" rel="noopener" aria-label="Instagram @iocshhh" title="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.5A4.5 4.5 0 1 0 16.5 13 4.5 4.5 0 0 0 12 8.5zm5.2-2.4a1.08 1.08 0 1 0 1.08 1.08 1.08 1.08 0 0 0-1.08-1.08z" fill="currentColor"/></svg>
+              </a>
+              <a class="social" href="https://t.me/iocshhh" target="_blank" rel="noopener" aria-label="Telegram @iocshhh" title="Telegram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.7 3.3c-.3-.3-.8-.4-1.2-.2L2.9 9.3c-.7.3-.8 1.2-.2 1.6l3.5 2.2 1.3 4.2c.2.7 1.1 1 1.6.5l2.4-2 3.8 2.6c.6.4 1.5.1 1.7-.6l3.3-16.3c.1-.5-.1-1-.6-1.3z" fill="currentColor"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BOTTOM container: pinned card / actions -->
+      <section id="bottom" class="bottom">
+        <div class="pinned-card panel">
+          <img class="pinned-image" src="iocsh/iocsh-pinned.png" alt="Pinned artwork">
+
+          <nav class="pinned-actions">
+            <button class="btn primary" id="btn-gallery">Gallery</button>
+            <button class="btn" id="btn-tnc">Terms &amp; Conditions</button>
+            <a class="btn" id="btn-commission" href="https://ngl.link/iocshh" target="_blank" rel="noopener">Message me anonymously</a>
+          </nav>
+
+          
+        </div>
+      </section>
+
+      <!-- Modals -->
+      <div id="modal-gallery" class="modal" aria-hidden="true">
+        <div class="modal-content">
+          <button class="modal-close" aria-label="Close gallery">×</button>
+          <h2>Gallery</h2>
+          <div class="masonry" id="gallery-masonry" tabindex="0"></div>
+        </div>
+      </div>
+
+      <div id="modal-tnc" class="modal" aria-hidden="true">
+        <div class="modal-content tnc">
+          <button class="modal-close" aria-label="Close terms">×</button>
+          <img src="iocsh/iocsh-tnc cover.png" alt="T&amp;C cover" class="tnc-cover">
+          <div class="tnc-text">
+            <h2 class="tnc-title">IOCSH’S TERMS AND CONDITIONS</h2>
+            <p class="tnc-subtitle">please read thoroughly :3</p>
+
+            <section class="tnc-section">
+              <h3>COMMISSION ORDER FORM</h3>
+              <ol>
+                <li>Triple-check your form before sending. If I've started, no changes will be accepted.</li>
+                <li>Be clear about what you're looking for — specify the color, theme, or text you want. The more details, the better I can make it happen.</li>
+                <li>If I'm not the right fit or can't do it, I'll let you know politely.</li>
+              </ol>
+            </section>
+
+            <section class="tnc-section">
+              <h3>COMMISSION PAYMENT</h3>
+              <ol>
+                <li>Payment required before starting — full or half upfront to secure the commission.</li>
+                <li>Payment is non-refundable, so please confirm only if you're 100% sure.</li>
+              </ol>
+            </section>
+
+            <section class="tnc-section">
+              <h3>COMMISSION PROCESS</h3>
+              <ol>
+                <li>Typical turnaround: 1–25 days. May vary due to workload or complexity — will keep you updated if delayed.</li>
+                <li>Be patient with your commission — work is handled first-come, first-served. Rush orders require an extra fee.</li>
+              </ol>
+            </section>
+
+            <section class="tnc-section">
+              <h3>COMPLETED COMMISSION</h3>
+              <ol>
+                <li>No major revisions after finalization, unless I made a mistake. Minor adjustments are okay, but note that files may be deleted after 3 days.</li>
+                <li>Do not edit or resell the final design. If you need changes, contact me directly.</li>
+              </ol>
+            </section>
+
+            <section class="tnc-section">
+              <h3>COMMISSION ETIQUETTE</h3>
+              <ol>
+                <li>Be respectful and polite. If you're rude or inappropriate, I won't work with you again.</li>
+                <li>Provide honest feedback — your comments help improve the quality of services.</li>
+                <li>I will work on your commission according to my schedule and availability. Please be patient — quality work takes time.</li>
+              </ol>
+            </section>
+
+            <p class="tnc-agreement">by commissioning me, you agree to these terms. submitting a form means you've read and agreed to the above.</p>
+            <button class="btn primary copy-form-btn" id="btn-copy-form" aria-label="Copy commission form">Copy Commission Form</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lightbox for viewing images -->
+      <div id="lightbox" class="lightbox" aria-hidden="true">
+        <button class="lightbox-close" aria-label="Close image">×</button>
+        <button class="lightbox-prev" aria-label="Previous">‹</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox-next" aria-label="Next">›</button>
+      </div>
+
+    </main>
+
+  <!-- Fire sparks layer -->
+  <div id="fire-sparks" aria-hidden="true"></div>
+
+    <script>
+      // Fire sparks emitter — smaller, higher, slower-fading sparks with trails
+      (function(){
+        const container = document.getElementById('fire-sparks');
+        if(!container) return;
+        function makeSpark(){
+          const s = document.createElement('span');
+          s.className = 'spark';
+          const left = Math.random() * 100; // percent across the width
+          // much smaller sizes for subtle embers
+          const size = 3 + Math.random() * 4; // px
+          // longer duration so they rise higher and fade slowly
+          const dur = 6000 + Math.random() * 6000; // ms (6s - 12s)
+          // more horizontal drift for a softer spread
+          const drift = (Math.random()-0.5) * 280; // px
+          s.style.left = left + '%';
+          s.style.setProperty('--s', size + 'px');
+          s.style.setProperty('--d', (dur/1000) + 's');
+          s.style.setProperty('--drift', drift + 'px');
+          s.style.opacity = '' + (0.6 + Math.random()*0.35);
+          // slightly vary z so trails overlay correctly
+          s.style.zIndex = 90 + Math.floor(Math.random()*10);
+          container.appendChild(s);
+          // cleanup after animation completes
+          setTimeout(()=>{ if(s && s.parentNode) s.parentNode.removeChild(s); }, dur + 400);
+        }
+
+        let running = true;
+        function loop(){
+          if(!running) return;
+          // spawn 1-2 tiny sparks per interval for subtlety
+          const n = 1 + Math.floor(Math.random()*2);
+          for(let i=0;i<n;i++) makeSpark();
+          // slower spawn interval for a calmer effect
+          setTimeout(loop, 450 + Math.random()*900);
+        }
+
+        document.addEventListener('visibilitychange', ()=>{ running = !document.hidden; if(running) loop(); });
+        // start after small delay
+        setTimeout(loop, 900);
+      })();
+      // Image list from img/ and gif folder
+      const galleryImages = [
+        'img/castdrag.PNG','img/castlong.jpg','img/castpf.PNG','img/gameikai.PNG','img/gccover.PNG','img/grncp.JPG','img/grnpf.JPG','img/h,cp.png','img/h,hl.png','img/h,hl(1).png','img/h,hl(2).png','img/h,hl(3).png','img/h,pfp.png','img/p,cp.png','img/p,hl.png','img/p,hl(1).png','img/p,hl(2).png','img/p,hl(3).png','img/p,pfp.png','img/pnkcp.jpg','img/pnkhl.jpg','img/pnkpfp.jpg','img/rbxgfxcp.PNG','img/rbxgfxstr.PNG','img/RZINL.PNG','img/RZINLby.PNG','img/splash.PNG','img/v-firef.PNG','img/v-fireg.PNG','img/v-icef.PNG','img/v-iceg.PNG'
+      ];
+
+      // DOM refs
+      const btnGallery = document.getElementById('btn-gallery');
+      const btnTnc = document.getElementById('btn-tnc');
+      const modalGallery = document.getElementById('modal-gallery');
+      const modalTnc = document.getElementById('modal-tnc');
+      const galleryMasonry = document.getElementById('gallery-masonry');
+      const closeButtons = document.querySelectorAll('.modal-close');
+      const lightbox = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightbox-img');
+      const lbClose = document.querySelector('.lightbox-close');
+      const lbNext = document.querySelector('.lightbox-next');
+      const lbPrev = document.querySelector('.lightbox-prev');
+      let currentIndex = 0;
+
+      function openModal(modal){
+        modal.style.display = 'block';
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal(modal){
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+      }
+
+      // Populate masonry lazily once when gallery opens
+      let masonryPopulated = false;
+      function populateMasonry(){
+        if(masonryPopulated) return; masonryPopulated = true;
+        galleryImages.forEach((src, idx)=>{
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = src.split('/').pop();
+          img.loading = 'lazy';
+          img.dataset.index = idx;
+          img.addEventListener('click', ()=>openLightbox(idx));
+          galleryMasonry.appendChild(img);
+        });
+      }
+
+      btnGallery.addEventListener('click', ()=>{ populateMasonry(); openModal(modalGallery); });
+      btnTnc.addEventListener('click', ()=> openModal(modalTnc));
+      closeButtons.forEach(b=>b.addEventListener('click', (e)=>{ closeModal(e.target.closest('.modal')); }));
+
+      // Close modal on backdrop click
+      document.querySelectorAll('.modal').forEach(mod=>{
+        mod.addEventListener('click', e=>{ if(e.target === mod) closeModal(mod); });
+      });
+
+      // Lightbox functions
+      function openLightbox(idx){
+        currentIndex = idx;
+        lbImg.src = galleryImages[currentIndex];
+        lightbox.style.display = 'flex';
+        lightbox.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLightbox(){ lightbox.style.display='none'; lightbox.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+      function nextImage(){ currentIndex = (currentIndex+1) % galleryImages.length; lbImg.src = galleryImages[currentIndex]; }
+      function prevImage(){ currentIndex = (currentIndex-1+galleryImages.length) % galleryImages.length; lbImg.src = galleryImages[currentIndex]; }
+
+      lbClose.addEventListener('click', closeLightbox);
+      lbNext.addEventListener('click', nextImage);
+      lbPrev.addEventListener('click', prevImage);
+      lightbox.addEventListener('click', e=>{ if(e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', e=>{
+        if(lightbox.style.display === 'flex'){
+          if(e.key === 'Escape') closeLightbox();
+          if(e.key === 'ArrowRight') nextImage();
+          if(e.key === 'ArrowLeft') prevImage();
+        }
+        if(modalGallery.style.display === 'block' && e.key === 'Escape') closeModal(modalGallery);
+        if(modalTnc.style.display === 'block' && e.key === 'Escape') closeModal(modalTnc);
+      });
+
+      // Sticky center logo behaviour
+      // Ensure modals start hidden
+      [modalGallery, modalTnc, lightbox].forEach(m=>{ m.style.display='none'; m.setAttribute('aria-hidden','true'); });
+
+      // Phone copy and toast
+      const btnPhone = document.getElementById('btn-phone');
+      function showToast(msg){
+        let t = document.createElement('div');
+        t.className = 'toast';
+        t.textContent = msg;
+        document.body.appendChild(t);
+        setTimeout(()=>{ t.classList.add('visible'); }, 20);
+        // keep toast visible for 7000ms (7 seconds) before hiding
+        setTimeout(()=>{ t.classList.remove('visible'); setTimeout(()=>t.remove(),300); }, 7000);
+      }
+      if(btnPhone){
+        btnPhone.addEventListener('click', ()=>{
+          const phone = btnPhone.dataset.phone || '';
+          if(!phone) return;
+          navigator.clipboard?.writeText(phone).then(()=> showToast('Phone copied'))
+          .catch(()=>{
+            // fallback
+            const ip = document.createElement('input'); ip.value = phone; document.body.appendChild(ip); ip.select(); document.execCommand('copy'); ip.remove(); showToast('Phone copied');
+          });
+        });
+      }
+
+      // Copy commission form
+      const btnCopyForm = document.getElementById('btn-copy-form');
+      const commissionFormText = `˚ 󰦐.ㅤC0MMISSI0N F0RMㅤ 󰟔
+
+⌗ · theme: *
+⌗ · color: *
+⌗ · size: *
+⌗ · budget: *
+
+⌗ – expected inclusions: (ex. pfp, highlights, editable file, etc.)
+
+⌗ — details: (please be specific, the clearer the request, the better i can deliver)
+
+▬▬▬▬▬▬▬▬▬▬▬▬
+
+？· rush: y/n
+？· if y, expected deadline: `;
+
+      if(btnCopyForm){
+        btnCopyForm.addEventListener('click', ()=>{
+          navigator.clipboard?.writeText(commissionFormText).then(()=> showToast('form copied! fill up and send it to my messenger! :3'))
+          .catch(()=>{
+            const ta = document.createElement('textarea'); ta.value = commissionFormText; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); showToast('form copied! fill up and send it to my messenger! :3');
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

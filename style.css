@@ -1,0 +1,303 @@
+:root{
+	--bg:#0b0b0b;
+	--panel:#0f0f10;
+	--muted:#bdb6b6;
+	--accent:#ff4b1f; /* fiery orange */
+	--accent-2:#ff8a00; /* yellow-orange */
+	--glow: 0 10px 30px rgba(255,80,20,0.18), 0 2px 6px rgba(255,90,10,0.12);
+	--glass: rgba(255,255,255,0.03);
+}
+
+/* Load local Agency font for brand and headings */
+@font-face{
+	font-family: 'Agency';
+	src: url('font/Agency.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Load Classica Bold for button text */
+@font-face{
+    font-family: 'ClassicaBold';
+    src: url('font/Classica-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Load Toxigenesis Bold (bd) for buttons */
+@font-face{
+	font-family: 'Toxigenesis';
+	src: url('font/toxigenesis bd.otf') format('opentype');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+	margin:0;
+	font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+	background:linear-gradient(180deg,#070707 0%, #140400 100%);
+	color:#fff;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+}
+
+.wrap{max-width:920px;margin:0 auto;padding:24px 18px 60px;display:block}
+
+/* add visible gap between top and bottom containers on all sizes */
+.wrap > section{margin-bottom:18px; padding-inline:1em}
+
+/* Sticky centered logo */
+.lockup{display:inline-block}
+
+.hero{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:18px}
+.avatar-wrap{position:relative;width:170px;height:170px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.avatar{width:150px;height:150px;border-radius:50%;object-fit:cover;border:6px solid rgba(255,80,20,0.12);box-shadow:0 6px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02)}
+.avatar-wrap .glow{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 20%, rgba(255,140,0,0.18), rgba(255,70,20,0.08) 40%, transparent 60%);filter:blur(10px);pointer-events:none}
+.name{font-size:20px;margin:0;color:var(--accent-2);text-shadow:0 2px 18px rgba(255,72,22,0.18)}
+
+/* Apply Agency font to brand/name and prominent headings */
+.brand{font-family:'Agency', system-ui, -apple-system, 'Segoe UI', Roboto, Arial; font-weight:600; letter-spacing:2px}
+
+/* Apply Agency to T&C headings and main h2 elements for emphasis */
+.tnc-text .tnc-title, .tnc-text .tnc-subtitle, .tnc-text h3, h2 {
+	font-family: 'Agency', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+	letter-spacing:2px;
+}
+
+.actions{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.action{display:block;padding:14px 18px;border-radius:12px;text-decoration:none;color:#fff;background:linear-gradient(90deg,rgba(255,75,31,0.14),rgba(255,138,0,0.06));box-shadow:var(--glow);border:1px solid rgba(255,100,30,0.06);font-weight:600;text-align:center}
+.action:active{transform:translateY(1px)}
+
+.panel{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:14px;padding:14px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.03)}
+.panel h2{margin:0 0 8px;font-size:16px;color:var(--accent)}
+.muted{color:var(--muted);line-height:1.45}
+
+.masonry{column-count:2;column-gap:10px}
+.masonry img{width:100%;display:block;margin:0 0 10px;border-radius:10px;break-inside:avoid;box-shadow:0 6px 18px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.03)}
+
+/* Home profile layout */
+.home{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+.profile-card{padding:0;overflow:hidden}
+.cover-wrap{height:clamp(120px,18vw,220px);overflow:hidden}
+.cover{width:100%;height:100%;object-fit:cover;border-radius:10px 10px 0 0}
+.profile-center{display:flex;flex-direction:column;align-items:center;padding:12px 0 18px}
+.profile-card{padding:0;overflow:hidden;max-width:720px;width:100%}
+.profile-pic{width:clamp(90px,14vw,150px);height:clamp(90px,14vw,150px);border-radius:50%;object-fit:cover;margin-top:calc(-1 * clamp(45px,7vw,60px));border:clamp(4px,0.7vw,6px) solid rgba(10,10,10,0.6);box-shadow:0 12px 40px rgba(0,0,0,0.6)}
+.brand{margin:8px 0 0;color:var(--accent-2); font-family:'Agency', system-ui, -apple-system, 'Segoe UI', Roboto, Arial; font-weight:600; letter-spacing:2px;
+	/* responsive size: scales between small and large screens */
+	font-size: clamp(14px, 4.5vw, 22px);
+	text-align:center;
+	/* ensure very long single-word names can break/wrap */
+	overflow-wrap:anywhere;
+	word-break:break-word;
+	hyphens:auto;
+}
+
+/* Profile blurb under the name: responsive and constrained for readability */
+.profile-center p{margin:8px 0 0;color:var(--muted);font-size:clamp(12px,3vw,15px);max-width:54ch;text-align:center;line-height:1.45}
+
+.pinned-card{display:flex;flex-direction:column;gap:12px}
+.pinned-image{width:100%;height:auto;border-radius:12px}
+.pinned-actions{display:flex;gap:8px;flex-direction:column}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#000;text-decoration:none;font-weight:700; font-family: 'Toxigenesis', 'ClassicaBold', system-ui, -apple-system, 'Segoe UI', Roboto, Arial; letter-spacing:1px}
+.pinned-actions .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#000;font-size:14px;padding:12px 14px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;text-align:center;width:100%;box-sizing:border-box;line-height:1;letter-spacing:1px}
+.pinned-actions .btn.primary{ /* ensure primary in this area matches the others */
+	background:linear-gradient(90deg,var(--accent),var(--accent-2));
+	color:#000;
+	letter-spacing:1px;
+}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 8px 28px rgba(255,80,20,0.14);color:#000}
+
+/* button hover/active animations */
+.btn{transition:transform .18s ease,box-shadow .18s ease}
+.btn:active{transform:translateY(2px)}
+.btn.primary:active{transform:translateY(1px) scale(.998)}
+
+/* Modals */
+.modal{position:fixed;inset:0;display:flex;align-items:flex-start;justify-content:center;padding:36px;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:1200}
+.modal-content{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:12px;padding:16px;max-width:920px;width:100%;max-height:88vh;overflow:auto;border:1px solid rgba(255,255,255,0.03)}
+.modal .modal-close{position:absolute;right:18px;top:18px;background:transparent;border:none;color:#fff;font-size:22px}
+
+.tnc-cover{width:100%;border-radius:10px;margin-bottom:8px}
+.tnc-text .tnc-title{ text-align:center; margin:6px 0 4px; color:var(--accent); }
+.tnc-text .tnc-subtitle{ text-align:center; margin:0 0 12px; color:var(--muted); }
+.tnc-text h3{ text-transform:uppercase; font-size:15px; margin:8px 0 6px; color:var(--accent-2) }
+.tnc-text ol{ margin:0 0 14px 1.1rem; color:var(--muted); line-height:1.5 }
+.tnc-text li{ margin:6px 0 }
+.tnc-text .tnc-agreement{
+		text-align:justify;
+		margin-top:12px;
+		color:var(--accent-2);
+		font-weight:700;
+}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.9);z-index:1300}
+.lightbox img{max-width:96%;max-height:86vh;border-radius:8px;box-shadow:0 18px 60px rgba(0,0,0,0.8)}
+.lightbox-close,.lightbox-prev,.lightbox-next{position:fixed;background:transparent;border:none;color:#fff;font-size:28px;padding:8px}
+.lightbox-close{right:18px;top:18px}
+.lightbox-prev{left:18px}
+.lightbox-next{right:18px}
+
+/* ensure gallery images are clickable and arranged */
+.masonry img{cursor:pointer}
+
+.contacts ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.contact{display:inline-flex;gap:10px;align-items:center;padding:10px;border-radius:10px;text-decoration:none;color:#fff;background:linear-gradient(90deg,rgba(255,75,31,0.06),transparent);border:1px solid rgba(255,255,255,0.03)}
+.contact svg{color:var(--accent-2)}
+
+.credits{text-align:center;padding:8px 0;font-size:12px}
+
+/* Socials */
+.socials{margin-top:12px}
+.social-list{display:flex;flex-direction:row;gap:10px;align-items:center;justify-content:center}
+.social{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:10px;text-decoration:none;color:#fff;background:linear-gradient(90deg,rgba(255,75,31,0.04),transparent);border:1px solid rgba(255,255,255,0.03)}
+.social svg{color:var(--accent-2);flex-shrink:0;width:20px;height:20px}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:rgba(0,0,0,0.8);padding:10px 14px;border-radius:10px;color:#fff;opacity:0;transition:all .28s ease;z-index:2000}
+.toast.visible{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Copy form button in T&C modal */
+.copy-form-btn{display:block;width:100%;margin-top:12px;padding:12px 14px}
+
+/* Larger screens */
+@media(min-width:480px){
+	.wrap{padding:36px;}
+	.avatar-wrap{width:210px;height:210px}
+	.avatar{width:190px;height:190px}
+	.masonry{column-count:3}
+	/* Keep top container stacked but center it; profile-card becomes fluid */
+	.profile-card{max-width:clamp(300px,50%,420px);width:100%;margin:0 auto}
+	/* ensure pinned card matches the profile-card width/centering on small tablets */
+	.pinned-card{flex:1;margin:0 auto;max-width:clamp(300px,50%,420px);width:100%}
+}
+
+/* Small screens: increase horizontal padding so content doesn't hug the edges */
+@media (max-width:480px) {
+	.wrap { padding-inline: 1.25rem; }
+	.wrap > section { padding-inline: 1.25rem; }
+
+	/* Ensure inner text containers also get horizontal breathing room */
+	.panel, .modal-content, .profile-center, .tnc-text, .masonry {
+		padding-inline: 1.25rem;
+	}
+}
+
+/* Small-tablet fix: 480px - 767px — make profile area taller so it visually matches pinned card */
+@media (min-width:480px) and (max-width:767px) {
+	.profile-card{
+		/* ensure it doesn't collapse and provides similar visual weight */
+		min-height:300px;
+		display:flex;
+		flex-direction:column;
+		justify-content:flex-start;
+	}
+	.cover-wrap{
+		/* slightly taller cover on small tablets */
+		height:clamp(140px,20vw,240px);
+	}
+}
+
+/* Tablet breakpoint: ensure both panels match in width/centering on tablets */
+@media(min-width:768px){
+	.profile-card{margin:0 auto;max-width:720px;width:100%}
+	.pinned-card{margin:0 auto;max-width:720px;width:100%}
+}
+
+@media(min-width:800px){
+	/* Grid-based main: two stacked rows (home, bottom). Home becomes two columns on wide screens */
+	.wrap{display:grid;grid-template-rows:auto auto;gap:28px;max-width:1100px;padding:36px 18px}
+	.masonry{column-count:3}
+	.home{grid-template-columns: minmax(260px,36%) 1fr;align-items:start;gap:24px}
+	/* make the profile card center and span the available grid so it matches the pinned-card width */
+	.profile-card{margin:0 auto;grid-column:1/-1;max-width:720px;width:100%}
+	/* ensure pinned card uses the same max-width and centering so both panels match exactly */
+	.pinned-card{margin:0 auto;max-width:720px;width:100%}
+	.bottom{margin-top:0}
+}
+
+/* Accessibility: focus states */
+.action:focus,.contact:focus{outline:3px solid rgba(255,130,50,0.18);outline-offset:3px}
+
+/* quick dark scrollbar for Windows phones/edge */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:8px}
+
+/* Fire sparks floating from bottom */
+/* Fire sparks container: span the full viewport so sparks can reach the top.
+	Place it behind the main content (z-index:0). Make sure `.wrap` creates a stacking
+	context above it so UI remains interactive. */
+#fire-sparks{position:fixed;left:0;right:0;top:0;bottom:0;/* full-viewport */pointer-events:none;overflow:hidden;z-index:0}
+
+/* Each spark is tiny; --s controls size (set from JS). */
+.spark{
+	position:absolute;
+	bottom:0;
+	display:block;
+	border-radius:50%;
+	width:var(--s,6px);
+	height:var(--s,6px);
+	pointer-events:none;
+	mix-blend-mode:screen;
+	filter:blur(.6px);
+	box-shadow:0 0 6px rgba(255,130,40,0.85);
+	background:radial-gradient(circle at 30% 30%, rgba(255,220,120,1), rgba(255,110,40,1));
+	opacity:0.95;
+	transform:translateY(0) scale(1);
+	animation:rise var(--d,8s) linear forwards;
+	z-index:2;
+}
+
+/* subtle trailing streak behind each spark using a pseudo-element; it follows the same animation */
+.spark::after{
+	content:"";
+	position:absolute;
+	left:50%;
+	transform:translateX(-50%);
+	bottom:0;
+	width:calc(var(--s,6px) * 0.6);
+	height:calc(var(--s,6px) * 10);
+	background:linear-gradient(to top, rgba(255,160,60,0.05), rgba(255,160,60,0.25), rgba(255,200,80,0.6));
+	filter:blur(2px);
+	opacity:0.55;
+	border-radius:4px;
+	transform-origin:bottom center;
+	animation:rise var(--d,8s) linear forwards;
+	z-index:1;
+}
+
+@keyframes rise{
+	0%{
+		transform:translateY(0) translateX(0) scale(1);
+		opacity:1;
+	}
+	50%{
+		/* stay bright for most of the trip */
+		opacity:0.95;
+	}
+	85%{
+		/* begin fading near the top */
+		opacity:0.6;
+		transform:translateY(-95vh) translateX(var(--drift,0px)) scale(.65);
+	}
+	100%{
+		transform:translateY(-140vh) translateX(var(--drift,0px)) scale(.35);
+		opacity:0;
+	}
+}
+
+/* smaller sparks on small screens: keep the container full-viewport but reduce visual density via emitter.
+   (The emitter already reduces spawn on small screens; container stays full height.) */
+@media (max-width:480px){
+	/* no change to container height here; keep full-viewport so sparks reach top on small screens too */
+}
+
+/* Ensure the main content stacks above the spark layer */
+.wrap{position:relative;z-index:1}
+
