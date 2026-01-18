@@ -293,6 +293,7 @@
       fetch('https://docs.google.com/spreadsheets/d/1Yi6qb7NWFIxD9zwdROK1FkwS2W0StFJG1PA9Z2Ugu4g/export?format=csv')
       .then(response => response.text())
       .then(data => {
+        console.log('Fetched data:', data);
         const lines = data.split('\n').slice(1); // Skip header
         const items = lines.map(line => {
           const cols = line.split(',');
@@ -306,6 +307,7 @@
             description: cols[6]?.trim() || ''
           };
         }).filter(item => item.url);
+        console.log('Items:', items);
         // Reverse to show newest (last in sheet) first
         items.reverse();
         galleryImages.length = 0; // Clear
