@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>iocsh's wibsayt :D</title>
+    <title>iocsh's portfolio</title>
     <link rel="stylesheet" href="style.css">
       <link rel="icon" href="iocsh/iocsh-logo.png">
   </head>
@@ -16,9 +16,8 @@
           </div>
           <div class="profile-center">
             <img class="profile-pic" src="iocsh/iocsh-profile.png" alt="IOCSh profile">
-            <h1 class="brand">iocsh incoln izchezi</h1>
-            <h1 class="brand">xailnihiwiviwivixicixiciamien</h1>
-            <p>a maximalist graphic artist, my wibsayt is still under construction. wear your safety helmet! :b</p>
+            <h1 class="brand">iocsh incoln izchezi</h1> 
+            <p></p>
             <div class="social-list" style="margin-top:10px;">
               <a class="social" href="https://facebook.com/iocshhh" target="_blank" rel="noopener" aria-label="Facebook @iocshhh" title="Facebook">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 12.07C22 6.49 17.52 2 11.94 2S2 6.49 2 12.07c0 4.99 3.66 9.13 8.44 9.93v-7.03H8.9v-2.9h1.54V9.41c0-1.52.9-2.36 2.28-2.36.66 0 1.35.12 1.35.12v1.49h-.76c-.75 0-.98.46-.98.94v1.12h1.67l-.27 2.9h-1.4V22c4.78-.8 8.44-4.94 8.44-9.93z" fill="currentColor"/></svg>
@@ -34,7 +33,11 @@
         </div>
       </section>
 
-      <!-- BOTTOM container: pinned card / actions -->
+      <section id="images" class="images panel">
+        <h2>Recent Graphics</h2>
+        <div id="image-container"></div>
+      </section>
+
       <section id="bottom" class="bottom">
         <div class="pinned-card panel">
           <img class="pinned-image" src="iocsh/iocsh-pinned.png" alt="Pinned artwork">
@@ -49,7 +52,6 @@
         </div>
       </section>
 
-      <!-- Modals -->
       <div id="modal-gallery" class="modal" aria-hidden="true">
         <div class="modal-content">
           <button class="modal-close" aria-label="Close gallery">×</button>
@@ -125,52 +127,47 @@
   <div id="fire-sparks" aria-hidden="true"></div>
 
     <script>
-      // Fire sparks emitter — smaller, higher, slower-fading sparks with trails
       (function(){
         const container = document.getElementById('fire-sparks');
         if(!container) return;
         function makeSpark(){
           const s = document.createElement('span');
           s.className = 'spark';
-          const left = Math.random() * 100; // percent across the width
-          // much smaller sizes for subtle embers
-          const size = 3 + Math.random() * 4; // px
-          // longer duration so they rise higher and fade slowly
-          const dur = 6000 + Math.random() * 6000; // ms (6s - 12s)
-          // more horizontal drift for a softer spread
-          const drift = (Math.random()-0.5) * 280; // px
+          const left = Math.random() * 100;
+
+          const size = 3 + Math.random() * 4;
+
+          const dur = 6000 + Math.random() * 6000;
+
+          const drift = (Math.random()-0.5) * 280;
           s.style.left = left + '%';
           s.style.setProperty('--s', size + 'px');
           s.style.setProperty('--d', (dur/1000) + 's');
           s.style.setProperty('--drift', drift + 'px');
           s.style.opacity = '' + (0.6 + Math.random()*0.35);
-          // slightly vary z so trails overlay correctly
+
           s.style.zIndex = 90 + Math.floor(Math.random()*10);
           container.appendChild(s);
-          // cleanup after animation completes
+
           setTimeout(()=>{ if(s && s.parentNode) s.parentNode.removeChild(s); }, dur + 400);
         }
 
         let running = true;
         function loop(){
           if(!running) return;
-          // spawn 1-2 tiny sparks per interval for subtlety
+
           const n = 1 + Math.floor(Math.random()*2);
           for(let i=0;i<n;i++) makeSpark();
-          // slower spawn interval for a calmer effect
+
           setTimeout(loop, 450 + Math.random()*900);
         }
 
         document.addEventListener('visibilitychange', ()=>{ running = !document.hidden; if(running) loop(); });
-        // start after small delay
+
         setTimeout(loop, 900);
       })();
-      // Image list from img/ and gif folder
-      const galleryImages = [
-        'img/castdrag.PNG','img/castlong.jpg','img/castpf.PNG','img/gameikai.PNG','img/gccover.PNG','img/grncp.JPG','img/grnpf.JPG','img/h,cp.png','img/h,hl.png','img/h,hl(1).png','img/h,hl(2).png','img/h,hl(3).png','img/h,pfp.png','img/p,cp.png','img/p,hl.png','img/p,hl(1).png','img/p,hl(2).png','img/p,hl(3).png','img/p,pfp.png','img/pnkcp.jpg','img/pnkhl.jpg','img/pnkpfp.jpg','img/rbxgfxcp.PNG','img/rbxgfxstr.PNG','img/RZINL.PNG','img/RZINLby.PNG','img/splash.PNG','img/v-firef.PNG','img/v-fireg.PNG','img/v-icef.PNG','img/v-iceg.PNG'
-      ];
+      const galleryImages = []; // Will be populated from spreadsheet
 
-      // DOM refs
       const btnGallery = document.getElementById('btn-gallery');
       const btnTnc = document.getElementById('btn-tnc');
       const modalGallery = document.getElementById('modal-gallery');
@@ -195,7 +192,6 @@
         document.body.style.overflow = '';
       }
 
-      // Populate masonry lazily once when gallery opens
       let masonryPopulated = false;
       function populateMasonry(){
         if(masonryPopulated) return; masonryPopulated = true;
@@ -214,12 +210,10 @@
       btnTnc.addEventListener('click', ()=> openModal(modalTnc));
       closeButtons.forEach(b=>b.addEventListener('click', (e)=>{ closeModal(e.target.closest('.modal')); }));
 
-      // Close modal on backdrop click
       document.querySelectorAll('.modal').forEach(mod=>{
         mod.addEventListener('click', e=>{ if(e.target === mod) closeModal(mod); });
       });
 
-      // Lightbox functions
       function openLightbox(idx){
         currentIndex = idx;
         lbImg.src = galleryImages[currentIndex];
@@ -245,11 +239,8 @@
         if(modalTnc.style.display === 'block' && e.key === 'Escape') closeModal(modalTnc);
       });
 
-      // Sticky center logo behaviour
-      // Ensure modals start hidden
       [modalGallery, modalTnc, lightbox].forEach(m=>{ m.style.display='none'; m.setAttribute('aria-hidden','true'); });
 
-      // Phone copy and toast
       const btnPhone = document.getElementById('btn-phone');
       function showToast(msg){
         let t = document.createElement('div');
@@ -257,7 +248,7 @@
         t.textContent = msg;
         document.body.appendChild(t);
         setTimeout(()=>{ t.classList.add('visible'); }, 20);
-        // keep toast visible for 7000ms (7 seconds) before hiding
+
         setTimeout(()=>{ t.classList.remove('visible'); setTimeout(()=>t.remove(),300); }, 7000);
       }
       if(btnPhone){
@@ -266,13 +257,12 @@
           if(!phone) return;
           navigator.clipboard?.writeText(phone).then(()=> showToast('Phone copied'))
           .catch(()=>{
-            // fallback
+
             const ip = document.createElement('input'); ip.value = phone; document.body.appendChild(ip); ip.select(); document.execCommand('copy'); ip.remove(); showToast('Phone copied');
           });
         });
       }
 
-      // Copy commission form
       const btnCopyForm = document.getElementById('btn-copy-form');
       const commissionFormText = `˚ 󰦐.ㅤC0MMISSI0N F0RMㅤ 󰟔
 
@@ -298,6 +288,79 @@
           });
         });
       }
+
+      // Fetch images from Google Spreadsheet
+      fetch('https://docs.google.com/spreadsheets/d/1Yi6qb7NWFIxD9zwdROK1FkwS2W0StFJG1PA9Z2Ugu4g/export?format=csv')
+      .then(response => response.text())
+      .then(data => {
+        const lines = data.split('\n').slice(1); // Skip header
+        const items = lines.map(line => {
+          const cols = line.split(',');
+          return {
+            url: cols[0]?.trim() || '',
+            title: cols[1]?.trim() || '',
+            category: cols[2]?.trim() || '',
+            theme: cols[3]?.trim() || '',
+            type: cols[4]?.trim() || '',
+            date: cols[5]?.trim() || '',
+            description: cols[6]?.trim() || ''
+          };
+        }).filter(item => item.url);
+        // Reverse to show newest (last in sheet) first
+        items.reverse();
+        galleryImages.length = 0; // Clear
+        galleryImages.push(...items.map(item => item.url));
+        const container = document.getElementById('image-container');
+        if (items.length === 0) return;
+        let currentIndex = 0;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'image-wrapper';
+        const img = document.createElement('img');
+        img.id = 'display-img';
+        img.src = items[currentIndex].url;
+        img.alt = 'Image from spreadsheet';
+        img.loading = 'lazy';
+        wrapper.appendChild(img);
+        const info = document.createElement('div');
+        info.className = 'image-info';
+        const updateInfo = () => {
+          info.innerHTML = `
+            <h3>${items[currentIndex].title}</h3>
+            <div class="info-row">
+              <span><strong>Category:</strong> ${items[currentIndex].category}</span>
+              <span><strong>Theme:</strong> ${items[currentIndex].theme}</span>
+            </div>
+            <div class="info-row">
+              <span><strong>Type:</strong> ${items[currentIndex].type}</span>
+              <span><strong>Date:</strong> ${items[currentIndex].date}</span>
+            </div>
+            <p><strong>Description:</strong> ${items[currentIndex].description}</p>
+          `;
+        };
+        updateInfo();
+        container.appendChild(info);
+        const nav = document.createElement('div');
+        nav.className = 'image-nav';
+        const prevBtn = document.createElement('button');
+        prevBtn.textContent = '‹';
+        prevBtn.addEventListener('click', () => {
+          currentIndex = (currentIndex - 1 + items.length) % items.length;
+          img.src = items[currentIndex].url;
+          updateInfo();
+        });
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = '›';
+        nextBtn.addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % items.length;
+          img.src = items[currentIndex].url;
+          updateInfo();
+        });
+        nav.appendChild(prevBtn);
+        nav.appendChild(nextBtn);
+        wrapper.appendChild(nav);
+        container.appendChild(wrapper);
+      })
+      .catch(error => console.error('Error fetching images:', error));
     </script>
   </body>
 </html>
