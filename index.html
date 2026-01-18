@@ -312,7 +312,7 @@
         items.reverse();
         items.forEach(item => {
           if (!item.url.startsWith('http')) {
-            item.url = 'https://drive.google.com/uc?export=view&id=' + item.url;
+            item.url = 'https://drive.google.com/uc?id=' + item.url;
           }
         });
         galleryImages.length = 0; // Clear
