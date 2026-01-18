@@ -112,8 +112,8 @@ h5.brand {
 .info-row{display:flex;justify-content:space-between;gap:10px;margin:3px 0}
 .info-row span{flex:1}
 .image-nav{display:flex;justify-content:space-between;margin-top:10px}
-.image-nav button{background:var(--accent);color:#000;border:none;padding:10px 15px;border-radius:5px;cursor:pointer;font-size:16px}
-.image-nav button:hover{background:var(--accent-2)}
+.image-nav button{background:transparent;color:#fff;border:none;padding:10px 15px;border-radius:5px;cursor:pointer;font-size:16px}
+.image-nav button:hover{background:transparent;color:var(--accent)}
 .profile-pic{width:clamp(90px,14vw,150px);height:clamp(90px,14vw,150px);border-radius:50%;object-fit:cover;margin-top:calc(-1 * clamp(45px,7vw,60px));border:clamp(4px,0.7vw,6px) solid rgba(10,10,10,0.6);box-shadow:0 12px 40px rgba(0,0,0,0.6)}
 .brand{margin:8px 0 0;color:var(--accent-2); font-family:'Agency', system-ui, -apple-system, 'Segoe UI', Roboto, Arial; font-weight:600; letter-spacing:2px;
 	text-align:center;

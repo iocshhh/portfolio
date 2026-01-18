@@ -248,13 +248,7 @@
           const img = document.createElement('img');
           img.src = item.url;
           img.alt = '';
-          img.onerror = () => {
-            if (img.src.includes('uc?id=')) {
-              img.src = img.src.replace('uc?id=', 'uc?export=view&id=');
-            } else {
-              console.error('Failed to load image:', img.src);
-            }
-          };
+          img.onerror = () => console.error('Failed to load image:', item.url);
           img.dataset.index = startIdx + idx;
           img.addEventListener('click', ()=>openLightbox(startIdx + idx));
           galleryMasonry.appendChild(img);
@@ -382,21 +376,52 @@
       fetch('https://docs.google.com/spreadsheets/d/1Yi6qb7NWFIxD9zwdROK1FkwS2W0StFJG1PA9Z2Ugu4g/export?format=csv')
       .then(response => response.text())
       .then(data => {
-        console.log('Fetched data:', data);
-        const lines = data.split('\n').slice(1); // Skip header
-        const spreadsheetItems = lines.map(line => {
-          const cols = line.split(',');
-          return {
-            url: cols[0]?.trim() || '',
-            title: cols[1]?.trim() || '',
-            category: cols[2]?.trim() || '',
-            theme: cols[3]?.trim() || '',
-            type: cols[4]?.trim() || '',
-            date: cols[5]?.trim() || '',
-            description: cols[6]?.trim() || ''
-          };
-        }).filter(item => item.url);
+        console.log('Fetched CSV data:', data);
+        // Simple CSV parser to handle quoted fields
+        function parseCSV(csv) {
+          const lines = csv.split('\n');
+          const result = [];
+          for (let i = 1; i < lines.length; i++) { // Skip header
+            const line = lines[i].trim();
+            if (!line) continue;
+            const cols = [];
+            let current = '';
+            let inQuotes = false;
+            for (let j = 0; j < line.length; j++) {
+              const char = line[j];
+              if (char === '"') {
+                inQuotes = !inQuotes;
+              } else if (char === ',' && !inQuotes) {
+                cols.push(current.trim());
+                current = '';
+              } else {
+                current += char;
+              }
+            }
+            cols.push(current.trim());
+            if (cols.length >= 7) {
+              result.push({
+                url: cols[0] || '',
+                title: cols[1] || '',
+                category: cols[2] || '',
+                theme: cols[3] || '',
+                type: cols[4] || '',
+                date: cols[5] || '',
+                description: cols[6] || ''
+              });
+            }
+          }
+          return result;
+        }
+        const spreadsheetItems = parseCSV(data).filter(item => item.url);
         console.log('Spreadsheet Items:', spreadsheetItems);
+        // Convert ImgBB page URLs to direct image URLs
+        spreadsheetItems.forEach(item => {
+          if (item.url.includes('ibb.co/') && !item.url.includes('i.ibb.co/')) {
+            item.url = item.url.replace('ibb.co/', 'i.ibb.co/');
+          }
+        });
+        console.log('Processed Spreadsheet Items:', spreadsheetItems);
         // Reverse to show newest (last in sheet) first
         spreadsheetItems.reverse();
         const allItems = localItems.concat(spreadsheetItems);
@@ -405,9 +430,10 @@
             item.url = 'img/' + item.url;
           }
         });
+        console.log('All Items:', allItems);
         galleryImages.length = 0; // Clear
         galleryImages.push(...allItems.map(item => item.url));
-        populateMasonry(localItems, 0);
+        populateMasonry(allItems, 0);
         const container = document.getElementById('image-container');
         if (spreadsheetItems.length === 0) return;
         let currentIndex = 0;
@@ -421,13 +447,6 @@
         img.classList.add('loading');
         wrapper.classList.add('loading');
         img.onload = () => { img.classList.remove('loading'); wrapper.classList.remove('loading'); img.classList.add('loaded'); };
-        img.onerror = () => {
-          if (img.src.includes('uc?id=')) {
-            img.src = img.src.replace('uc?id=', 'uc?export=view&id=');
-          } else {
-            console.error('Failed to load image:', items[currentIndex].url);
-          }
-        };
         wrapper.appendChild(img);
         const info = document.createElement('div');
         info.className = 'image-info';
