@@ -321,7 +321,8 @@
         img.id = 'display-img';
         img.src = items[currentIndex].url;
         img.alt = 'Image from spreadsheet';
-        img.loading = 'lazy';
+        img.loading = 'eager';
+        img.onerror = () => console.error('Failed to load image:', items[currentIndex].url);
         wrapper.appendChild(img);
         const info = document.createElement('div');
         info.className = 'image-info';
