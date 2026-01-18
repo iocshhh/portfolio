@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>iocsh's portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+      .loading {
+        position: relative;
+      }
+      .loading::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin: -10px;
+        border: 2px solid rgba(0,0,0,0.3);
+        border-top: 2px solid #000;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
       <link rel="icon" href="iocsh/iocsh-logo.png">
   </head>
   <body>
@@ -47,7 +69,7 @@
             <button class="btn" id="btn-tnc">Terms &amp; Conditions</button>
             <a class="btn" id="btn-commission" href="https://ngl.link/iocshh" target="_blank" rel="noopener">Message me anonymously</a>
           </nav>
-
+          
           
         </div>
       </section>
@@ -176,6 +198,14 @@
       const closeButtons = document.querySelectorAll('.modal-close');
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightbox-img');
+      lbImg.onload = () => lbImg.classList.remove('loading');
+      lbImg.onerror = () => {
+        if (lbImg.src.includes('uc?id=')) {
+          lbImg.src = lbImg.src.replace('uc?id=', 'uc?export=view&id=');
+        } else {
+          console.error('Failed to load image:', lbImg.src);
+        }
+      };
       const lbClose = document.querySelector('.lightbox-close');
       const lbNext = document.querySelector('.lightbox-next');
       const lbPrev = document.querySelector('.lightbox-prev');
@@ -200,6 +230,15 @@
           img.src = src;
           img.alt = src.split('/').pop();
           img.loading = 'lazy';
+          img.classList.add('loading');
+          img.onload = () => img.classList.remove('loading');
+          img.onerror = () => {
+            if (img.src.includes('uc?id=')) {
+              img.src = img.src.replace('uc?id=', 'uc?export=view&id=');
+            } else {
+              console.error('Failed to load image:', img.src);
+            }
+          };
           img.dataset.index = idx;
           img.addEventListener('click', ()=>openLightbox(idx));
           galleryMasonry.appendChild(img);
@@ -217,13 +256,14 @@
       function openLightbox(idx){
         currentIndex = idx;
         lbImg.src = galleryImages[currentIndex];
+        lbImg.classList.add('loading');
         lightbox.style.display = 'flex';
         lightbox.setAttribute('aria-hidden','false');
         document.body.style.overflow = 'hidden';
       }
       function closeLightbox(){ lightbox.style.display='none'; lightbox.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-      function nextImage(){ currentIndex = (currentIndex+1) % galleryImages.length; lbImg.src = galleryImages[currentIndex]; }
-      function prevImage(){ currentIndex = (currentIndex-1+galleryImages.length) % galleryImages.length; lbImg.src = galleryImages[currentIndex]; }
+      function nextImage(){ currentIndex = (currentIndex+1) % galleryImages.length; lbImg.src = galleryImages[currentIndex]; lbImg.classList.add('loading'); }
+      function prevImage(){ currentIndex = (currentIndex-1+galleryImages.length) % galleryImages.length; lbImg.src = galleryImages[currentIndex]; lbImg.classList.add('loading'); }
 
       lbClose.addEventListener('click', closeLightbox);
       lbNext.addEventListener('click', nextImage);
@@ -327,7 +367,15 @@
         img.src = items[currentIndex].url;
         img.alt = 'Image from spreadsheet';
         img.loading = 'eager';
-        img.onerror = () => console.error('Failed to load image:', items[currentIndex].url);
+        img.classList.add('loading');
+        img.onload = () => img.classList.remove('loading');
+        img.onerror = () => {
+          if (img.src.includes('uc?id=')) {
+            img.src = img.src.replace('uc?id=', 'uc?export=view&id=');
+          } else {
+            console.error('Failed to load image:', items[currentIndex].url);
+          }
+        };
         wrapper.appendChild(img);
         const info = document.createElement('div');
         info.className = 'image-info';
@@ -354,6 +402,7 @@
         prevBtn.addEventListener('click', () => {
           currentIndex = (currentIndex - 1 + items.length) % items.length;
           img.src = items[currentIndex].url;
+          img.classList.add('loading');
           updateInfo();
         });
         const nextBtn = document.createElement('button');
@@ -361,6 +410,7 @@
         nextBtn.addEventListener('click', () => {
           currentIndex = (currentIndex + 1) % items.length;
           img.src = items[currentIndex].url;
+          img.classList.add('loading');
           updateInfo();
         });
         nav.appendChild(prevBtn);
